@@ -58,7 +58,7 @@
         <div class="method-grid">
           <article><span class="method-num">01</span><h3>Frozen task</h3><p>Reference code, judge, fixtures and instructions are content-checked before and after the agent.</p></article>
           <article><span class="method-num">02</span><h3>Independent verify</h3><p>The final candidate is run by a network-disabled verifier. Exact N0 equivalence and the task’s noise-adjusted benefit bar must both pass.</p></article>
-          <article><span class="method-num">03</span><h3>Transparent status</h3><p>Provider cooldown, agent exit failures and user cancellation are separate from performance rejection. A failed or missing run never becomes a zero-speedup score.</p></article>
+          <article><span class="method-num">03</span><h3>Transparent status</h3><p>Provider cooldown and user cancellation remain unscored. A completed agent error, exactness failure or benefit-bar failure is shown separately and contributes zero to a completed model row; no speedup is fabricated.</p></article>
         </div>
         <p class="method-note"><strong>Science Score / 50:</strong> for each task, a strict PASS with speedup S earns ln(S) / ln(best accepted S on that task); a completed rejected trial earns 0. We sum the ten task values and multiply by 5. Only complete model rows receive a score, and the best speedup is recalculated when new rows finish. This uses the original benchmark's per-task logarithmic normalization, but <strong>not</strong> its ECI overall fit; these scores cannot be compared with its Gemini 43.22. The static snapshot updates only when audited and republished.</p>
       </section>
