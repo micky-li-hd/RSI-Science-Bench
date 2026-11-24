@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RSI-Science-Bench formal model × harness results across ten science training workloads.">
+  <title>Leaderboard · RSI-Science-Bench</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="leaderboard.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="RSI-Science-Bench home"><span class="brand-mark">✳</span><span>RSI-Science <small>BENCH</small></span></a>
+      <nav aria-label="Main navigation">
+        <a href="#overview">Overview</a>
+        <a href="#matrix">Matrix</a>
+        <a href="#task-view">Per task</a>
+        <a href="#method">Method</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <div class="eyebrow">PREVIEW · FORMAL H20 RUNS</div>
+      <h1>Science training,<br><em>measured honestly.</em></h1>
+      <p class="intro">One frozen workload per repository. One model–harness pair across ten protein, molecule, genomics and physics tasks. Every result is checked by an independent verifier.</p>
+      <div class="hero-meta"><span id="updated">Loading audited snapshot…</span><span class="meta-separator" aria-hidden="true"></span><span>36,000 s agent ceiling · H20 GPUs</span></div>
+
+      <section class="notice" aria-label="Comparison caveat">
+        <div class="notice-icon" aria-hidden="true">i</div>
+        <p><strong>Science-domain companion, not the original leaderboard.</strong> These are different tasks on NVIDIA H20, so the original RSI-Infra ECI scores and API-cost Pareto chart are intentionally not reused. Only strict verifier PASS results count.</p>
+      </section>
+
+      <section id="overview" aria-labelledby="overview-title">
+        <div class="section-head"><span class="section-label">§ 01&nbsp; OVERVIEW</span><h2 id="overview-title">At a glance</h2></div>
+        <div id="summary" class="summary-grid" aria-live="polite"></div>
+        <div class="panel chart-panel">
+          <div class="panel-heading"><div><h3>Verified passes</h3><p>Out of ten science tasks. Incomplete and infrastructure-invalid rows remain visible, but are not assigned a comparable score.</p></div><span class="unit">TASKS / 10</span></div>
+          <div id="bars" class="bar-list" role="img" aria-label="Strict passes by model and harness"></div>
+        </div>
+      </section>
+
+      <section id="matrix" aria-labelledby="matrix-title">
+        <div class="section-head"><span class="section-label">§ 02&nbsp; MODEL × TASK</span><h2 id="matrix-title">Formal result matrix</h2></div>
+        <div class="legend" aria-label="Result legend"><span><i class="swatch pass"></i> Strict PASS</span><span><i class="swatch rejected"></i> Not accepted</span><span><i class="swatch infra"></i> Infrastructure / run error</span><span><i class="swatch pending"></i> Pending / cancelled</span></div>
+        <div class="table-wrap" tabindex="0" aria-label="Scrollable result matrix"><table id="board"><caption class="sr-only">Model and harness results by science task</caption></table></div>
+        <p class="table-note">A measured speedup is shown even when the independent verifier rejected it; only green cells are counted as PASS. Raw Traces remain on the remote machines and are not published here.</p>
+      </section>
+
+      <section id="task-view" aria-labelledby="task-title">
+        <div class="section-head"><span class="section-label">§ 03&nbsp; PER TASK</span><h2 id="task-title">Explore one workload</h2></div>
+        <div class="task-controls"><label for="task-select">Science task</label><select id="task-select"></select></div>
+        <div id="task-detail" class="panel task-panel" aria-live="polite"></div>
+      </section>
+
+      <section id="method" aria-labelledby="method-title">
+        <div class="section-head"><span class="section-label">§ 04&nbsp; PROTOCOL</span><h2 id="method-title">What counts</h2></div>
+        <div class="method-grid">
+          <article><span class="method-num">01</span><h3>Frozen task</h3><p>Reference code, judge, fixtures and instructions are content-checked before and after the agent.</p></article>
+          <article><span class="method-num">02</span><h3>Independent verify</h3><p>The final candidate is run by a network-disabled verifier. Exact N0 equivalence and the task’s noise-adjusted benefit bar must both pass.</p></article>
+          <article><span class="method-num">03</span><h3>Transparent status</h3><p>Provider cooldown, agent exit failures and user cancellation are separate from performance rejection. A failed or missing run never becomes a zero-speedup score.</p></article>
+        </div>
+        <p class="method-note">Ranking here means strict PASS count, with geometric mean of accepted speedups only as a tiebreaker. It is <strong>not</strong> the original RSI-Infra ECI score. The static snapshot updates only when the export script is rerun and the site is republished.</p>
+      </section>
+    </main>
+
+    <footer><span>RSI-Science-Bench · independent science-domain preview</span><span id="footer-date"></span></footer>
+  </div>
+</body>
+</html>
