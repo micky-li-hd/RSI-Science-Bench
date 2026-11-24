@@ -1,0 +1,1 @@
+Public, credential-free snapshot of the independent RSI-Science-Bench audit. Raw agent traces and remote machine paths are intentionally not published. The leaderboard counts only strict verifier PASS runs; provider failures and cancellations are excluded from model scores.
