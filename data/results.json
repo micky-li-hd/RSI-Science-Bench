@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "audited_at": "2026-11-24T08:45:37Z",
+  "audited_at": "2026-11-24T09:39:04Z",
   "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
-  "score_provisional": true,
+  "score_provisional": false,
   "hardware": "NVIDIA H20; not directly comparable with the RSI-Infra Preview H200 leaderboard.",
   "models": [
     {
@@ -11,21 +11,21 @@
       "name": "GPT-6.2 Astra",
       "harness": "Codex 0.171.0",
       "family": "GPT",
-      "score": 27.35
+      "score": 26.24
     },
     {
       "id": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "harness": "Claude Code 2.1.330",
       "family": "Claude",
-      "score": 49.98
+      "score": 47.71
     },
     {
       "id": "minimax-m3.1-flash",
       "name": "MiniMax M3.1 Flash",
       "harness": "Codex 0.171.0",
       "family": "MiniMax",
-      "score": 13.34
+      "score": 13.01
     },
     {
       "id": "deepseek-flash",
@@ -46,7 +46,7 @@
       "name": "Kimi k3.1-pro",
       "harness": "Claude Code 2.1.330",
       "family": "Kimi",
-      "score": null
+      "score": 15.24
     }
   ],
   "tasks": [
@@ -676,8 +676,8 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "protenix",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 1.1240470332606487,
       "trace_captured": true,
       "failed_gates": [
 
