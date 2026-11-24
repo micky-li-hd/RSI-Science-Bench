@@ -35,7 +35,7 @@
         <div class="section-head"><span class="section-label">§ 01&nbsp; OVERVIEW</span><h2 id="overview-title">At a glance</h2></div>
         <div id="summary" class="summary-grid" aria-live="polite"></div>
         <div class="panel chart-panel">
-          <div class="panel-heading"><div><h3>Verified passes</h3><p>Out of ten science tasks. Incomplete and infrastructure-invalid rows remain visible, but are not assigned a comparable score.</p></div><span class="unit">TASKS / 10</span></div>
+          <div class="panel-heading"><div><h3>Science Score</h3><p>0–50 points from independently verified speedups across ten tasks. Incomplete and infrastructure-invalid rows remain visible but unscored.</p><p id="score-status" class="score-status"></p></div><span class="unit">POINTS / 50</span></div>
           <div id="bars" class="bar-list" role="img" aria-label="Strict passes by model and harness"></div>
         </div>
       </section>
@@ -44,7 +44,7 @@
         <div class="section-head"><span class="section-label">§ 02&nbsp; MODEL × TASK</span><h2 id="matrix-title">Formal result matrix</h2></div>
         <div class="legend" aria-label="Result legend"><span><i class="swatch pass"></i> Strict PASS</span><span><i class="swatch rejected"></i> Not accepted</span><span><i class="swatch infra"></i> Infrastructure / run error</span><span><i class="swatch pending"></i> Running / pending / cancelled</span></div>
         <div class="table-wrap" tabindex="0" aria-label="Scrollable result matrix"><table id="board"><caption class="sr-only">Model and harness results by science task</caption></table></div>
-        <p class="table-note">A measured speedup is shown even when the independent verifier rejected it; only green cells are counted as PASS. Select a task below to inspect the verification outcome. Raw Traces remain on the remote machines and are not published here.</p>
+        <p class="table-note">A measured speedup is shown even when the independent verifier rejected it; only green cells contribute to the score. Select a task below to inspect verification. Raw Traces remain on the remote machines and are not published here.</p>
       </section>
 
       <section id="task-view" aria-labelledby="task-title">
@@ -60,7 +60,7 @@
           <article><span class="method-num">02</span><h3>Independent verify</h3><p>The final candidate is run by a network-disabled verifier. Exact N0 equivalence and the task’s noise-adjusted benefit bar must both pass.</p></article>
           <article><span class="method-num">03</span><h3>Transparent status</h3><p>Provider cooldown, agent exit failures and user cancellation are separate from performance rejection. A failed or missing run never becomes a zero-speedup score.</p></article>
         </div>
-        <p class="method-note">Ranking here means strict PASS count, with geometric mean of accepted speedups only as a tiebreaker. It is <strong>not</strong> the original RSI-Infra ECI score. The static snapshot updates only when the export script is rerun and the site is republished.</p>
+        <p class="method-note"><strong>Science Score / 50:</strong> for each task, a strict PASS with speedup S earns ln(S) / ln(best accepted S on that task); a completed rejected trial earns 0. We sum the ten task values and multiply by 5. Only complete model rows receive a score, and the best speedup is recalculated when new rows finish. This uses the original benchmark's per-task logarithmic normalization, but <strong>not</strong> its ECI overall fit; these scores cannot be compared with its Gemini 43.22. The static snapshot updates only when audited and republished.</p>
       </section>
     </main>
 

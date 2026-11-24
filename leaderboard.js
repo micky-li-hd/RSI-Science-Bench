@@ -18,6 +18,7 @@ const el = (tag, className, text) => {
 
 const numeric = value => typeof value === 'number' && Number.isFinite(value);
 const speed = value => numeric(value) ? `${value.toFixed(2)}×` : '—';
+const score = value => numeric(value) ? value.toFixed(2) : '—';
 const geoMean = values => values.length ? Math.exp(values.reduce((sum, value) => sum + Math.log(value), 0) / values.length) : 0;
 const dateLabel = value => new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Shanghai' }).format(new Date(value)) + ' CST';
 const complete = record => !['pending', 'running', 'infrastructure', 'cancelled'].includes(record.status);
@@ -50,7 +51,7 @@ function rankModels(data) {
   }).sort((a, b) => {
     if (a.excluded !== b.excluded) return a.excluded ? 1 : -1;
     if (a.pending !== b.pending) return a.pending ? 1 : -1;
-    return b.passCount - a.passCount || b.mean - a.mean;
+    return (b.score ?? -1) - (a.score ?? -1) || b.passCount - a.passCount || b.mean - a.mean;
   });
 }
 
@@ -79,12 +80,12 @@ function renderBars(models) {
   target.replaceChildren(...models.map(model => {
     const row = el('div', `bar-row${model.excluded ? ' invalid' : ''}${model.pending ? ' pending' : ''}`);
     const label = el('div', 'bar-label', model.name);
-    label.append(el('small', '', model.excluded ? 'Excluded · provider failure' : model.pending ? 'Not started' : model.running ? `${model.harness} · in progress` : model.harness));
+    label.append(el('small', '', model.excluded ? 'Excluded · provider failure' : model.pending ? 'Not started' : model.running ? `${model.harness} · in progress` : `${model.harness} · ${model.passCount}/10 PASS`));
     const track = el('div', 'bar-track');
     const fill = el('div', 'bar-fill');
-    fill.style.width = `${model.passCount * 10}%`;
+    fill.style.width = `${numeric(model.score) ? model.score * 2 : 0}%`;
     track.append(fill);
-    row.append(label, track, el('div', 'bar-number', model.excluded || model.running || model.pending ? '—' : `${model.passCount}/10`));
+    row.append(label, track, el('div', 'bar-number', score(model.score)));
     return row;
   }));
 }
@@ -93,7 +94,7 @@ function renderBoard(data, models) {
   const table = document.getElementById('board');
   const head = el('thead');
   const heading = el('tr');
-  heading.append(el('th', '', 'Model · harness'), el('th', '', 'PASS'));
+  heading.append(el('th', '', 'Model · harness'), el('th', '', 'Score / 50'), el('th', '', 'PASS'));
   data.tasks.forEach(task => { const th = el('th', '', task.name); th.title = task.domain; heading.append(th); });
   head.append(heading);
   const body = el('tbody');
@@ -105,7 +106,7 @@ function renderBoard(data, models) {
     if (model.excluded) modelCell.append(el('div', 'row-note', 'INVALID · PROVIDER COOLDOWN'));
     if (model.pending) modelCell.append(el('div', 'row-note', 'NOT STARTED'));
     if (model.running) modelCell.append(el('div', 'row-note', 'FORMAL RUN IN PROGRESS'));
-    row.append(modelCell, el('td', 'count-cell', model.excluded || model.pending || model.running ? '—' : `${model.passCount}/10`));
+    row.append(modelCell, el('td', 'count-cell', score(model.score)), el('td', 'count-cell', model.excluded || model.pending || model.running ? '—' : `${model.passCount}/10`));
     data.tasks.forEach(task => {
       const td = el('td');
       td.append(cell(model.records.find(record => record.task === task.id)));
@@ -150,6 +151,7 @@ async function main() {
   if (data.schema_version !== 1 || data.records.length !== data.models.length * data.tasks.length) throw new Error('Incomplete leaderboard data');
   document.getElementById('updated').textContent = `Audited ${dateLabel(data.audited_at)}`;
   document.getElementById('footer-date').textContent = `Snapshot: ${dateLabel(data.audited_at)}`;
+  document.getElementById('score-status').textContent = data.score_provisional ? 'Provisional: Kimi is still running; scores will be recalculated when all active rows finish.' : 'Final for the completed active model rows.';
   const models = rankModels(data);
   renderSummary(data);
   renderBars(models);
