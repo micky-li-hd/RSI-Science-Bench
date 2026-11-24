@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "audited_at": "2026-11-24T03:49:27Z",
+  "audited_at": "2026-11-24T04:13:55Z",
   "method": "Strict PASS count out of ten; accepted-speedup geometric mean is only a tiebreaker. No RSI-Infra ECI score is claimed.",
   "hardware": "NVIDIA H20; not directly comparable with the RSI-Infra Preview H200 leaderboard.",
   "models": [
@@ -510,9 +510,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -522,9 +520,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -534,9 +530,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -546,9 +540,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -558,9 +550,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -570,9 +560,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -582,16 +570,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
@@ -601,9 +580,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -613,9 +590,7 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -625,329 +600,107 @@
       "speedup": null,
       "trace_captured": true,
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "chemberta",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "esm2",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "fno",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "hyenadna",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "nucleotide_transformer",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "proteinmpnn",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "protenix",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "pyg_qm9",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "schnetpack_qm9",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     },
     {
       "model": "kimi-k3.1-pro",
       "task": "torchmd_qm9",
-      "status": "pending",
+      "status": "running",
       "speedup": null,
-      "trace_captured": false,
+      "trace_captured": true,
       "failed_gates": [
-        "trial_exists",
-        "rsi_protocol",
-        "model",
-        "agent",
-        "harness_version",
-        "reasoning_effort",
-        "endpoint_protocol",
-        "agent_timeout_36000",
-        "gpu_visible",
-        "gpu_h20",
-        "frozen_before",
-        "one_trace_file",
-        "trace_nonempty",
-        "final_exists",
-        "deadline_not_reached",
-        "agent_returncode",
-        "verifier_returncode",
-        "judge_intact_after_agent",
-        "judge_intact_after_verifier",
-        "final_result_exists",
-        "status_pass",
-        "accepted",
-        "exact"
+
       ]
     }
   ]
