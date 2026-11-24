@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "audited_at": "2026-11-24T05:41:33Z",
+  "audited_at": "2026-11-24T06:04:09Z",
   "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
   "score_provisional": true,
@@ -624,8 +624,8 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "esm2",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 1.0724278128055766,
       "trace_captured": true,
       "failed_gates": [
 
@@ -654,11 +654,12 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "nucleotide_transformer",
-      "status": "running",
-      "speedup": null,
+      "status": "not_accepted",
+      "speedup": 1.0120736382357203,
       "trace_captured": true,
       "failed_gates": [
-
+        "status_pass",
+        "accepted"
       ]
     },
     {
