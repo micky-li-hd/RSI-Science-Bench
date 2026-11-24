@@ -43,6 +43,19 @@ function cell(record) {
   return badge;
 }
 
+function retryCell(record) {
+  if (!record) return null;
+  const label = record.status === 'pass' ? `Retry PASS ${speed(record.speedup)}`
+    : record.status === 'running' ? 'Retry running'
+    : record.status === 'pending' ? 'Retry queued'
+    : record.status === 'not_exact' ? `Retry not exact ${speed(record.speedup)}`
+    : record.status === 'not_accepted' ? `Retry below bar ${speed(record.speedup)}`
+    : 'Retry run error';
+  const note = el('span', `retry-note ${record.status}`, label);
+  note.title = `Second attempt only · ${verification(record)} · primary score unchanged`;
+  return note;
+}
+
 function rankModels(data) {
   return data.models.map(model => {
     const records = data.records.filter(record => record.model === model.id);
@@ -110,6 +123,8 @@ function renderBoard(data, models) {
     data.tasks.forEach(task => {
       const td = el('td');
       td.append(cell(model.records.find(record => record.task === task.id)));
+      const retry = data.repeat_records.find(record => record.model === model.id && record.task === task.id);
+      if (retry) td.append(retryCell(retry));
       row.append(td);
     });
     body.append(row);
@@ -132,6 +147,8 @@ function renderTask(data, models, taskId) {
     const name = el('div', 'task-item-name', model.name);
     name.append(el('div', 'task-item-harness', model.harness));
     name.append(el('div', 'task-item-verification', verification(record)));
+    const retry = data.repeat_records.find(item => item.model === model.id && item.task === taskId);
+    if (retry) name.append(el('div', 'task-item-retry', `Second attempt: ${verification(retry)}${numeric(retry.speedup) ? ` · ${speed(retry.speedup)}` : ''}`));
     const meter = el('div', 'task-item-meter');
     const fill = el('span');
     fill.style.width = record.status === 'pass' ? `${Math.min(100, record.speedup / max * 100)}%` : '0%';
@@ -150,10 +167,12 @@ async function main() {
   const response = await fetch(dataUrl, { cache: 'no-store' });
   if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
   const data = await response.json();
-  if (data.schema_version !== 1 || data.records.length !== data.models.length * data.tasks.length) throw new Error('Incomplete leaderboard data');
-  document.getElementById('updated').textContent = `Audited ${dateLabel(data.audited_at)}`;
-  document.getElementById('footer-date').textContent = `Snapshot: ${dateLabel(data.audited_at)}`;
-  document.getElementById('score-status').textContent = data.score_provisional ? 'Provisional: Kimi is still running; scores will be recalculated when all active rows finish.' : 'Final for the completed active model rows.';
+  if (data.schema_version !== 2 || data.records.length !== data.models.length * data.tasks.length || data.repeat_records.length !== 15) throw new Error('Incomplete leaderboard data');
+  document.getElementById('updated').textContent = `Primary audited ${dateLabel(data.audited_at)} · second attempts ${dateLabel(data.repeat_audited_at)}`;
+  document.getElementById('footer-date').textContent = `Second-attempt snapshot: ${dateLabel(data.repeat_audited_at)}`;
+  document.getElementById('score-status').textContent = 'Primary scores only; second attempts are separately labeled and do not change these totals. ChemBERTa primary trials may have inherited earlier template notes.';
+  const retryDone = data.repeat_records.filter(complete).length;
+  document.getElementById('repeat-status').textContent = `Second attempts: ${retryDone}/15 completed, ${data.repeat_records.filter(item => item.status === 'running').length} running, ${data.repeat_records.filter(item => item.status === 'pending').length} queued. All five ChemBERTa retries use blank report and work-log templates. Primary scores remain unchanged.`;
   const models = rankModels(data);
   renderSummary(data);
   renderBars(models);
