@@ -3,7 +3,7 @@ const STATUS = {
   not_accepted: { short: 'Not accepted', long: 'Below the benefit / acceptance bar' },
   not_exact: { short: 'Not exact', long: 'Exactness check failed' },
   agent_error: { short: 'Run error', long: 'Agent did not exit successfully' },
-  infrastructure: { short: 'Provider error', long: 'AIHub provider cooldown; excluded from model scoring' },
+  infrastructure: { short: 'Provider error', long: 'Provider/API failure; excluded from model scoring' },
   cancelled: { short: 'Cancelled', long: 'Stopped at user request; excluded from model scoring' },
   pending: { short: 'Pending', long: 'Formal trial not started' },
   running: { short: 'Running', long: 'Formal trial is in progress' }
@@ -22,12 +22,13 @@ const score = value => numeric(value) ? value.toFixed(2) : '—';
 const geoMean = values => values.length ? Math.exp(values.reduce((sum, value) => sum + Math.log(value), 0) / values.length) : 0;
 const dateLabel = value => new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Shanghai' }).format(new Date(value)) + ' CST';
 const complete = record => !['pending', 'running', 'infrastructure', 'cancelled'].includes(record.status);
+const validRetry = record => ['pass', 'not_accepted', 'not_exact'].includes(record.status);
 const gateLabel = gate => ({ exact: 'exactness', accepted: 'benefit bar', agent_returncode: 'agent exit', verifier_returncode: 'verifier exit', judge_intact_after_agent: 'frozen artifacts', judge_intact_after_verifier: 'frozen artifacts' })[gate] || gate.replaceAll('_', ' ');
 function verification(record) {
   if (record.status === 'pass') return 'Independent verifier PASS · exact N0 · benefit bar · frozen artifacts' + (record.trace_captured ? ' · Trace captured' : '');
   if (record.status === 'running') return 'Formal run active · verification pending' + (record.trace_captured ? ' · Trace captured' : '');
   if (record.status === 'pending') return 'Formal run not started · verification pending';
-  if (record.status === 'infrastructure') return 'Provider failure · excluded from performance comparison';
+  if (record.status === 'infrastructure') return `${record.provider_error === 'billing_credit_low' ? 'AIHub credit balance too low' : 'Provider failure'} · excluded from performance comparison`;
   if (record.status === 'cancelled') return 'Stopped by user · excluded from performance comparison';
   const gates = [...new Set((record.failed_gates || []).filter(gate => gate !== 'status_pass').map(gateLabel))];
   return `Independent check: ${gates.length ? gates.join(', ') + ' failed' : 'not accepted'}` + (record.trace_captured ? ' · Trace captured' : '');
@@ -50,6 +51,7 @@ function retryCell(record) {
     : record.status === 'pending' ? 'Retry queued'
     : record.status === 'not_exact' ? `Retry not exact ${speed(record.speedup)}`
     : record.status === 'not_accepted' ? `Retry below bar ${speed(record.speedup)}`
+    : record.status === 'infrastructure' ? 'Retry provider error'
     : 'Retry run error';
   const note = el('span', `retry-note ${record.status}`, label);
   note.title = `Second attempt only · ${verification(record)} · primary score unchanged`;
@@ -78,7 +80,7 @@ function renderSummary(data) {
     ['Strict PASS', String(pass), 'Independent verifier accepted'],
     ['Completed trials', `${comparable} / ${data.records.length - excluded}`, 'Active model–harness rows only'],
     ['In progress / queued', `${running} / ${pending}`, 'Running / not started'],
-    ['Excluded / stopped', String(excluded), 'GLM provider failure and user cancellation']
+    ['Excluded / stopped', String(excluded), 'Provider failures and user cancellations']
   ];
   const target = document.getElementById('summary');
   target.replaceChildren(...cards.map(([label, value, sub]) => {
@@ -171,8 +173,9 @@ async function main() {
   document.getElementById('updated').textContent = `Primary audited ${dateLabel(data.audited_at)} · second attempts ${dateLabel(data.repeat_audited_at)}`;
   document.getElementById('footer-date').textContent = `Second-attempt snapshot: ${dateLabel(data.repeat_audited_at)}`;
   document.getElementById('score-status').textContent = 'Primary scores only; second attempts are separately labeled and do not change these totals. ChemBERTa primary trials may have inherited earlier template notes.';
-  const retryDone = data.repeat_records.filter(complete).length;
-  document.getElementById('repeat-status').textContent = `Second attempts: ${retryDone}/15 completed, ${data.repeat_records.filter(item => item.status === 'running').length} running, ${data.repeat_records.filter(item => item.status === 'pending').length} queued. All five ChemBERTa retries use blank report and work-log templates. Primary scores remain unchanged.`;
+  const retryDone = data.repeat_records.filter(validRetry).length;
+  const retryErrors = data.repeat_records.filter(item => ['agent_error', 'infrastructure', 'cancelled'].includes(item.status)).length;
+  document.getElementById('repeat-status').textContent = `Second attempts: ${retryDone}/15 valid results, ${data.repeat_records.filter(item => item.status === 'running').length} running, ${data.repeat_records.filter(item => item.status === 'pending').length} queued${retryErrors ? `, ${retryErrors} run error${retryErrors === 1 ? '' : 's'} excluded from valid results` : ''}. All five ChemBERTa retries use blank report and work-log templates. Primary scores remain unchanged.`;
   const models = rankModels(data);
   renderSummary(data);
   renderBars(models);
