@@ -1,0 +1,954 @@
+{
+  "schema_version": 1,
+  "audited_at": "2026-11-24T03:49:27Z",
+  "method": "Strict PASS count out of ten; accepted-speedup geometric mean is only a tiebreaker. No RSI-Infra ECI score is claimed.",
+  "hardware": "NVIDIA H20; not directly comparable with the RSI-Infra Preview H200 leaderboard.",
+  "models": [
+    {
+      "id": "gpt-6.2-astra",
+      "name": "GPT-6.2 Astra",
+      "harness": "Codex 0.171.0",
+      "family": "GPT"
+    },
+    {
+      "id": "claude-opus-5-5",
+      "name": "Claude Opus 5.5",
+      "harness": "Claude Code 2.1.330",
+      "family": "Claude"
+    },
+    {
+      "id": "minimax-m3.1-flash",
+      "name": "MiniMax M3.1 Flash",
+      "harness": "Codex 0.171.0",
+      "family": "MiniMax"
+    },
+    {
+      "id": "deepseek-flash",
+      "name": "DeepSeek V4.1 Flash-1017",
+      "harness": "DSH 0.2.2-rc.5",
+      "family": "DeepSeek"
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "harness": "Claude Code 2.1.330",
+      "family": "GLM"
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "name": "Kimi k3.1-pro",
+      "harness": "Claude Code 2.1.330",
+      "family": "Kimi"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "proteinmpnn",
+      "name": "ProteinMPNN",
+      "domain": "Protein design"
+    },
+    {
+      "id": "esm2",
+      "name": "ESM-2",
+      "domain": "Protein language"
+    },
+    {
+      "id": "protenix",
+      "name": "Protenix",
+      "domain": "Protein structure"
+    },
+    {
+      "id": "chemberta",
+      "name": "ChemBERTa",
+      "domain": "Molecular language"
+    },
+    {
+      "id": "pyg_qm9",
+      "name": "PyG GINE / QM9",
+      "domain": "Molecular property"
+    },
+    {
+      "id": "torchmd_qm9",
+      "name": "TorchMD-Net / QM9",
+      "domain": "Molecular dynamics"
+    },
+    {
+      "id": "schnetpack_qm9",
+      "name": "SchNetPack / QM9",
+      "domain": "Atomistic modelling"
+    },
+    {
+      "id": "hyenadna",
+      "name": "HyenaDNA",
+      "domain": "Genomics"
+    },
+    {
+      "id": "nucleotide_transformer",
+      "name": "Nucleotide Transformer",
+      "domain": "Genomics"
+    },
+    {
+      "id": "fno",
+      "name": "NeuralOperator FNO",
+      "domain": "Physics / PDE"
+    }
+  ],
+  "records": [
+    {
+      "model": "gpt-6.2-astra",
+      "task": "chemberta",
+      "status": "pass",
+      "speedup": 1.3860678260022434,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "esm2",
+      "status": "pass",
+      "speedup": 1.3944285316650034,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "fno",
+      "status": "pass",
+      "speedup": 3.223330626652346,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "hyenadna",
+      "status": "pass",
+      "speedup": 1.8582991171997634,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "nucleotide_transformer",
+      "status": "pass",
+      "speedup": 1.5021605449667803,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "proteinmpnn",
+      "status": "pass",
+      "speedup": 3.587739036902254,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "protenix",
+      "status": "pass",
+      "speedup": 1.1652504520344031,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "pyg_qm9",
+      "status": "pass",
+      "speedup": 1.3868754482798806,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "schnetpack_qm9",
+      "status": "pass",
+      "speedup": 1.36808398432926,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "gpt-6.2-astra",
+      "task": "torchmd_qm9",
+      "status": "pass",
+      "speedup": 1.1022228184232647,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "chemberta",
+      "status": "pass",
+      "speedup": 1.8630566135269113,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "esm2",
+      "status": "pass",
+      "speedup": 1.8938091865252185,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "fno",
+      "status": "pass",
+      "speedup": 5.8160192371643085,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "hyenadna",
+      "status": "pass",
+      "speedup": 3.1025796212920613,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "nucleotide_transformer",
+      "status": "pass",
+      "speedup": 1.8017533350045989,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "proteinmpnn",
+      "status": "pass",
+      "speedup": 7.256924373716892,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "protenix",
+      "status": "pass",
+      "speedup": 1.7858592482164088,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "pyg_qm9",
+      "status": "pass",
+      "speedup": 1.3919244688348427,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "schnetpack_qm9",
+      "status": "pass",
+      "speedup": 1.8952771313880041,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "claude-opus-5-5",
+      "task": "torchmd_qm9",
+      "status": "pass",
+      "speedup": 2.040025292588847,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "chemberta",
+      "status": "agent_error",
+      "speedup": 1.238450216881954,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode"
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "esm2",
+      "status": "not_accepted",
+      "speedup": 1.004795966880274,
+      "trace_captured": true,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "fno",
+      "status": "pass",
+      "speedup": 2.7988672479526255,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "hyenadna",
+      "status": "pass",
+      "speedup": 1.090454123875553,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "nucleotide_transformer",
+      "status": "pass",
+      "speedup": 1.3877680885216048,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "proteinmpnn",
+      "status": "pass",
+      "speedup": 2.536660881683535,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "protenix",
+      "status": "not_accepted",
+      "speedup": 1.3624268662228558,
+      "trace_captured": true,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "pyg_qm9",
+      "status": "pass",
+      "speedup": 1.2205479769772365,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "schnetpack_qm9",
+      "status": "pass",
+      "speedup": 1.0973880965622165,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "torchmd_qm9",
+      "status": "pass",
+      "speedup": 1.1813137071390667,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "chemberta",
+      "status": "not_accepted",
+      "speedup": 1.0124083498049665,
+      "trace_captured": true,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "esm2",
+      "status": "not_exact",
+      "speedup": 0.9822111881624884,
+      "trace_captured": true,
+      "failed_gates": [
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "fno",
+      "status": "not_accepted",
+      "speedup": 0.9842850451414668,
+      "trace_captured": true,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "hyenadna",
+      "status": "pass",
+      "speedup": 3.1187067109129845,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "nucleotide_transformer",
+      "status": "not_accepted",
+      "speedup": 0.9864796137501473,
+      "trace_captured": true,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "proteinmpnn",
+      "status": "pass",
+      "speedup": 2.290924742972622,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "protenix",
+      "status": "pass",
+      "speedup": 1.0618216613065916,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "pyg_qm9",
+      "status": "not_accepted",
+      "speedup": 0.9722145641192276,
+      "trace_captured": true,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "schnetpack_qm9",
+      "status": "not_accepted",
+      "speedup": 1.0284185380083757,
+      "trace_captured": true,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "torchmd_qm9",
+      "status": "pass",
+      "speedup": 1.1144868271523596,
+      "trace_captured": true,
+      "failed_gates": [
+
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "chemberta",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "esm2",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "fno",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "hyenadna",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "nucleotide_transformer",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "proteinmpnn",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "protenix",
+      "status": "cancelled",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "pyg_qm9",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "schnetpack_qm9",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "glm-5.3",
+      "task": "torchmd_qm9",
+      "status": "infrastructure",
+      "speedup": null,
+      "trace_captured": true,
+      "failed_gates": [
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "chemberta",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "esm2",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "fno",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "hyenadna",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "nucleotide_transformer",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "proteinmpnn",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "protenix",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "pyg_qm9",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "schnetpack_qm9",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "torchmd_qm9",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ]
+    }
+  ]
+}
