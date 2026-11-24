@@ -145,7 +145,9 @@ function renderTask(data, models, taskId) {
 }
 
 async function main() {
-  const response = await fetch('./data/results.json', { cache: 'no-store' });
+  const dataUrl = new URL('./data/results.json', window.location.href);
+  dataUrl.searchParams.set('v', String(Date.now()));
+  const response = await fetch(dataUrl, { cache: 'no-store' });
   if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
   const data = await response.json();
   if (data.schema_version !== 1 || data.records.length !== data.models.length * data.tasks.length) throw new Error('Incomplete leaderboard data');
