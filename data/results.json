@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "audited_at": "2026-11-24T05:20:07Z",
+  "audited_at": "2026-11-24T05:41:33Z",
   "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
   "score_provisional": true,
@@ -634,8 +634,8 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "fno",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 2.727470172161008,
       "trace_captured": true,
       "failed_gates": [
 
@@ -664,11 +664,12 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "proteinmpnn",
-      "status": "running",
-      "speedup": null,
+      "status": "not_accepted",
+      "speedup": 1.002105024584825,
       "trace_captured": true,
       "failed_gates": [
-
+        "status_pass",
+        "accepted"
       ]
     },
     {
@@ -684,11 +685,12 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "pyg_qm9",
-      "status": "running",
-      "speedup": null,
+      "status": "not_accepted",
+      "speedup": 0.9956649085195499,
       "trace_captured": true,
       "failed_gates": [
-
+        "status_pass",
+        "accepted"
       ]
     },
     {
@@ -704,8 +706,8 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "torchmd_qm9",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 1.6459203510635363,
       "trace_captured": true,
       "failed_gates": [
 
