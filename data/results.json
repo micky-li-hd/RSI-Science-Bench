@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "audited_at": "2026-11-24T05:11:51Z",
+  "audited_at": "2026-11-24T05:20:07Z",
   "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
   "score_provisional": true,
@@ -694,8 +694,8 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "schnetpack_qm9",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 3.2262821213033313,
       "trace_captured": true,
       "failed_gates": [
 
