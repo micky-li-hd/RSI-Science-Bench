@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-11-24T12:51:06Z",
-  "repeat_audited_at": "2026-11-24T12:51:17Z",
+  "audited_at": "2026-11-24T14:34:45Z",
+  "repeat_audited_at": "2026-11-24T14:34:56Z",
   "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
   "score_provisional": false,
@@ -109,6 +109,7 @@
       "status": "pass",
       "speedup": 1.3860678260022434,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -119,6 +120,7 @@
       "status": "pass",
       "speedup": 1.3944285316650034,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -129,6 +131,7 @@
       "status": "pass",
       "speedup": 3.223330626652346,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -139,6 +142,7 @@
       "status": "pass",
       "speedup": 1.8582991171997634,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -149,6 +153,7 @@
       "status": "pass",
       "speedup": 1.5021605449667803,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -159,6 +164,7 @@
       "status": "pass",
       "speedup": 3.587739036902254,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -169,6 +175,7 @@
       "status": "pass",
       "speedup": 1.1652504520344031,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -179,6 +186,7 @@
       "status": "pass",
       "speedup": 1.3868754482798806,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -189,6 +197,7 @@
       "status": "pass",
       "speedup": 1.36808398432926,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -199,6 +208,7 @@
       "status": "pass",
       "speedup": 1.1022228184232647,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -209,6 +219,7 @@
       "status": "pass",
       "speedup": 1.8630566135269113,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -219,6 +230,7 @@
       "status": "pass",
       "speedup": 1.8938091865252185,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -229,6 +241,7 @@
       "status": "pass",
       "speedup": 5.8160192371643085,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -239,6 +252,7 @@
       "status": "pass",
       "speedup": 3.1025796212920613,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -249,6 +263,7 @@
       "status": "pass",
       "speedup": 1.8017533350045989,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -259,6 +274,7 @@
       "status": "pass",
       "speedup": 7.256924373716892,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -269,6 +285,7 @@
       "status": "pass",
       "speedup": 1.7858592482164088,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -279,6 +296,7 @@
       "status": "pass",
       "speedup": 1.3919244688348427,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -289,6 +307,7 @@
       "status": "pass",
       "speedup": 1.8952771313880041,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -299,6 +318,7 @@
       "status": "pass",
       "speedup": 2.040025292588847,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -309,6 +329,7 @@
       "status": "agent_error",
       "speedup": 1.238450216881954,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "agent_returncode"
       ]
@@ -319,6 +340,7 @@
       "status": "not_accepted",
       "speedup": 1.004795966880274,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -330,6 +352,7 @@
       "status": "pass",
       "speedup": 2.7988672479526255,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -340,6 +363,7 @@
       "status": "pass",
       "speedup": 1.090454123875553,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -350,6 +374,7 @@
       "status": "pass",
       "speedup": 1.3877680885216048,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -360,6 +385,7 @@
       "status": "pass",
       "speedup": 2.536660881683535,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -370,6 +396,7 @@
       "status": "not_accepted",
       "speedup": 1.3624268662228558,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -381,6 +408,7 @@
       "status": "pass",
       "speedup": 1.2205479769772365,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -391,6 +419,7 @@
       "status": "pass",
       "speedup": 1.0973880965622165,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -401,6 +430,7 @@
       "status": "pass",
       "speedup": 1.1813137071390667,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -411,6 +441,7 @@
       "status": "not_accepted",
       "speedup": 1.0124083498049665,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -422,6 +453,7 @@
       "status": "not_exact",
       "speedup": 0.9822111881624884,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted",
@@ -434,6 +466,7 @@
       "status": "not_accepted",
       "speedup": 0.9842850451414668,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -445,6 +478,7 @@
       "status": "pass",
       "speedup": 3.1187067109129845,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -455,6 +489,7 @@
       "status": "not_accepted",
       "speedup": 0.9864796137501473,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -466,6 +501,7 @@
       "status": "pass",
       "speedup": 2.290924742972622,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -476,6 +512,7 @@
       "status": "pass",
       "speedup": 1.0618216613065916,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -486,6 +523,7 @@
       "status": "not_accepted",
       "speedup": 0.9722145641192276,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -497,6 +535,7 @@
       "status": "not_accepted",
       "speedup": 1.0284185380083757,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -508,6 +547,7 @@
       "status": "pass",
       "speedup": 1.1144868271523596,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -518,6 +558,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -528,6 +569,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -538,6 +580,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -548,6 +591,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -558,6 +602,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -568,6 +613,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -578,6 +624,7 @@
       "status": "cancelled",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -588,6 +635,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -598,6 +646,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -608,6 +657,7 @@
       "status": "infrastructure",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -618,6 +668,7 @@
       "status": "pass",
       "speedup": 1.272425006010083,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -628,6 +679,7 @@
       "status": "pass",
       "speedup": 1.0724278128055766,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -638,6 +690,7 @@
       "status": "pass",
       "speedup": 2.727470172161008,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -648,6 +701,7 @@
       "status": "pass",
       "speedup": 1.0957680137990449,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -658,6 +712,7 @@
       "status": "not_accepted",
       "speedup": 1.0120736382357203,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -669,6 +724,7 @@
       "status": "not_accepted",
       "speedup": 1.002105024584825,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -680,6 +736,7 @@
       "status": "pass",
       "speedup": 1.1240470332606487,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -690,6 +747,7 @@
       "status": "not_accepted",
       "speedup": 0.9956649085195499,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -701,6 +759,7 @@
       "status": "pass",
       "speedup": 3.2262821213033313,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -711,6 +770,7 @@
       "status": "pass",
       "speedup": 1.6459203510635363,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -723,6 +783,7 @@
       "status": "pass",
       "speedup": 1.4688145063345928,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -730,13 +791,12 @@
     {
       "model": "claude-opus-5-5",
       "task": "chemberta",
-      "status": "agent_error",
-      "speedup": 1.0107714887413297,
+      "status": "infrastructure",
+      "speedup": null,
       "trace_captured": true,
+      "provider_error": "billing_credit_low",
       "failed_gates": [
-        "agent_returncode",
-        "status_pass",
-        "accepted"
+
       ]
     },
     {
@@ -745,6 +805,7 @@
       "status": "not_accepted",
       "speedup": 1.0048201800049301,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -753,9 +814,10 @@
     {
       "model": "minimax-m3.1-flash",
       "task": "esm2",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 1.1545488639230757,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -766,6 +828,7 @@
       "status": "running",
       "speedup": null,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -776,6 +839,7 @@
       "status": "not_accepted",
       "speedup": 0.9887422609295139,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -784,11 +848,13 @@
     {
       "model": "deepseek-flash",
       "task": "esm2",
-      "status": "pending",
-      "speedup": null,
-      "trace_captured": false,
+      "status": "not_accepted",
+      "speedup": 0.9921320754909184,
+      "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
-
+        "status_pass",
+        "accepted"
       ]
     },
     {
@@ -797,6 +863,7 @@
       "status": "not_accepted",
       "speedup": 1.0118008935473186,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -808,6 +875,7 @@
       "status": "pass",
       "speedup": 1.3954008287046171,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -818,6 +886,7 @@
       "status": "not_accepted",
       "speedup": 1.02488118233993,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -829,6 +898,7 @@
       "status": "not_accepted",
       "speedup": 1.0299528716764335,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
@@ -837,9 +907,10 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "chemberta",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 1.1610140681708956,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -847,11 +918,13 @@
     {
       "model": "kimi-k3.1-pro",
       "task": "nucleotide_transformer",
-      "status": "running",
-      "speedup": null,
+      "status": "not_accepted",
+      "speedup": 0.9992005531635887,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
-
+        "status_pass",
+        "accepted"
       ]
     },
     {
@@ -860,6 +933,7 @@
       "status": "pass",
       "speedup": 1.0928455977091291,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
 
       ]
@@ -870,6 +944,7 @@
       "status": "not_accepted",
       "speedup": 1.0151566444891291,
       "trace_captured": true,
+      "provider_error": null,
       "failed_gates": [
         "status_pass",
         "accepted"
