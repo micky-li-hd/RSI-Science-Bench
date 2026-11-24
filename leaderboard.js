@@ -20,6 +20,17 @@ const numeric = value => typeof value === 'number' && Number.isFinite(value);
 const speed = value => numeric(value) ? `${value.toFixed(2)}×` : '—';
 const geoMean = values => values.length ? Math.exp(values.reduce((sum, value) => sum + Math.log(value), 0) / values.length) : 0;
 const dateLabel = value => new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Shanghai' }).format(new Date(value)) + ' CST';
+const complete = record => !['pending', 'running', 'infrastructure', 'cancelled'].includes(record.status);
+const gateLabel = gate => ({ exact: 'exactness', accepted: 'benefit bar', agent_returncode: 'agent exit', verifier_returncode: 'verifier exit', judge_intact_after_agent: 'frozen artifacts', judge_intact_after_verifier: 'frozen artifacts' })[gate] || gate.replaceAll('_', ' ');
+function verification(record) {
+  if (record.status === 'pass') return 'Independent verifier PASS · exact N0 · benefit bar · frozen artifacts' + (record.trace_captured ? ' · Trace captured' : '');
+  if (record.status === 'running') return 'Formal run active · verification pending' + (record.trace_captured ? ' · Trace captured' : '');
+  if (record.status === 'pending') return 'Formal run not started · verification pending';
+  if (record.status === 'infrastructure') return 'Provider failure · excluded from performance comparison';
+  if (record.status === 'cancelled') return 'Stopped by user · excluded from performance comparison';
+  const gates = [...new Set((record.failed_gates || []).filter(gate => gate !== 'status_pass').map(gateLabel))];
+  return `Independent check: ${gates.length ? gates.join(', ') + ' failed' : 'not accepted'}` + (record.trace_captured ? ' · Trace captured' : '');
+}
 
 function cell(record) {
   const config = STATUS[record.status] || STATUS.pending;
@@ -35,7 +46,7 @@ function rankModels(data) {
   return data.models.map(model => {
     const records = data.records.filter(record => record.model === model.id);
     const accepted = records.filter(record => record.status === 'pass');
-    return { ...model, records, accepted, passCount: accepted.length, mean: geoMean(accepted.map(record => record.speedup)), excluded: model.id === 'glm-5.3', pending: records.every(record => record.status === 'pending') };
+    return { ...model, records, accepted, passCount: accepted.length, mean: geoMean(accepted.map(record => record.speedup)), excluded: model.id === 'glm-5.3', pending: records.every(record => record.status === 'pending'), running: records.some(record => record.status === 'running') };
   }).sort((a, b) => {
     if (a.excluded !== b.excluded) return a.excluded ? 1 : -1;
     if (a.pending !== b.pending) return a.pending ? 1 : -1;
@@ -45,14 +56,15 @@ function rankModels(data) {
 
 function renderSummary(data) {
   const pass = data.records.filter(record => record.status === 'pass').length;
-  const comparable = data.records.filter(record => !['pending', 'running', 'infrastructure', 'cancelled'].includes(record.status)).length;
+  const comparable = data.records.filter(complete).length;
   const pending = data.records.filter(record => record.status === 'pending').length;
+  const running = data.records.filter(record => record.status === 'running').length;
   const excluded = data.records.filter(record => ['infrastructure', 'cancelled'].includes(record.status)).length;
   const cards = [
     ['Strict PASS', String(pass), 'Independent verifier accepted'],
-    ['Comparable trials', `${comparable} / 60`, 'Four model–harness rows completed'],
-    ['Not started', String(pending), 'Kimi row remains pending'],
-    ['Excluded / stopped', String(excluded), 'GLM provider cooldown and cancellation']
+    ['Completed trials', `${comparable} / ${data.records.length - excluded}`, 'Active model–harness rows only'],
+    ['In progress / queued', `${running} / ${pending}`, 'Running / not started'],
+    ['Excluded / stopped', String(excluded), 'GLM provider failure and user cancellation']
   ];
   const target = document.getElementById('summary');
   target.replaceChildren(...cards.map(([label, value, sub]) => {
@@ -67,12 +79,12 @@ function renderBars(models) {
   target.replaceChildren(...models.map(model => {
     const row = el('div', `bar-row${model.excluded ? ' invalid' : ''}${model.pending ? ' pending' : ''}`);
     const label = el('div', 'bar-label', model.name);
-    label.append(el('small', '', model.excluded ? 'Excluded · provider cooldown' : model.pending ? 'Not started' : model.harness));
+    label.append(el('small', '', model.excluded ? 'Excluded · provider failure' : model.pending ? 'Not started' : model.running ? `${model.harness} · in progress` : model.harness));
     const track = el('div', 'bar-track');
     const fill = el('div', 'bar-fill');
     fill.style.width = `${model.passCount * 10}%`;
     track.append(fill);
-    row.append(label, track, el('div', 'bar-number', model.excluded ? '—' : `${model.passCount}/10`));
+    row.append(label, track, el('div', 'bar-number', model.excluded || model.running || model.pending ? '—' : `${model.passCount}/10`));
     return row;
   }));
 }
@@ -92,7 +104,8 @@ function renderBoard(data, models) {
     modelCell.append(el('div', 'model-name', model.name), el('div', 'model-harness', model.harness));
     if (model.excluded) modelCell.append(el('div', 'row-note', 'INVALID · PROVIDER COOLDOWN'));
     if (model.pending) modelCell.append(el('div', 'row-note', 'NOT STARTED'));
-    row.append(modelCell, el('td', 'count-cell', model.excluded ? '—' : `${model.passCount}/10`));
+    if (model.running) modelCell.append(el('div', 'row-note', 'FORMAL RUN IN PROGRESS'));
+    row.append(modelCell, el('td', 'count-cell', model.excluded || model.pending || model.running ? '—' : `${model.passCount}/10`));
     data.tasks.forEach(task => {
       const td = el('td');
       td.append(cell(model.records.find(record => record.task === task.id)));
@@ -117,6 +130,7 @@ function renderTask(data, models, taskId) {
     const row = el('div', 'task-item');
     const name = el('div', 'task-item-name', model.name);
     name.append(el('div', 'task-item-harness', model.harness));
+    name.append(el('div', 'task-item-verification', verification(record)));
     const meter = el('div', 'task-item-meter');
     const fill = el('span');
     fill.style.width = record.status === 'pass' ? `${Math.min(100, record.speedup / max * 100)}%` : '0%';
