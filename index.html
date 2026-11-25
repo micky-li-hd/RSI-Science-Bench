@@ -6,7 +6,7 @@
   <meta name="description" content="RSI-Science-Bench formal model × harness results across ten science training workloads.">
   <title>Leaderboard · RSI-Science-Bench</title>
   <link rel="stylesheet" href="styles.css?v=20261124-retry">
-  <script src="leaderboard.js?v=20261124-retry" defer></script>
+  <script src="leaderboard.js?v=20261125-gemini" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -61,7 +61,7 @@
           <article><span class="method-num">02</span><h3>Independent verify</h3><p>The final candidate is run by a network-disabled verifier. Exact N0 equivalence and the task’s noise-adjusted benefit bar must both pass.</p></article>
           <article><span class="method-num">03</span><h3>Transparent status</h3><p>Provider cooldown and user cancellation remain unscored. A completed agent error, exactness failure or benefit-bar failure is shown separately and contributes zero to a completed model row; no speedup is fabricated.</p></article>
         </div>
-        <p class="method-note"><strong>Science Score / 50:</strong> for each task, a strict PASS with speedup S earns ln(S) / ln(best accepted S on that task); a completed rejected trial earns 0. We sum the ten task values and multiply by 5. Only complete model rows receive a score. The displayed scores use primary trials only; second attempts are a separately labeled sensitivity check, not best-of-two replacement. The primary ChemBERTa template contained prior optimization notes, so all five ChemBERTa pairs are being rerun from copies with empty reports and work logs. This uses the original benchmark's per-task logarithmic normalization, but <strong>not</strong> its ECI overall fit; these scores cannot be compared with its Gemini 43.22. The static snapshot updates only when audited and republished.</p>
+        <p class="method-note"><strong>Science Score / 50:</strong> for each task, a strict PASS with speedup S earns ln(S) / ln(best accepted S on that task); a completed rejected trial earns 0. We sum the ten task values and multiply by 5. Only complete model rows receive a score. The displayed scores use primary trials only; second attempts are a separately labeled sensitivity check, not best-of-two replacement. The primary ChemBERTa template contained prior optimization notes, so all five ChemBERTa pairs were rerun from copies with empty reports and work logs. Gemini 4 Hydrogen uses Antigravity CLI on the same ten frozen science tasks; its row is unscored until complete. This uses the original benchmark's per-task logarithmic normalization, but <strong>not</strong> its ECI overall fit; these scores cannot be compared directly with the RSI-Infra leaderboard. The static snapshot updates only when audited and republished.</p>
       </section>
     </main>
 

@@ -62,9 +62,8 @@ function rankModels(data) {
   return data.models.map(model => {
     const records = data.records.filter(record => record.model === model.id);
     const accepted = records.filter(record => record.status === 'pass');
-    return { ...model, records, accepted, passCount: accepted.length, mean: geoMean(accepted.map(record => record.speedup)), excluded: model.id === 'glm-5.3', pending: records.every(record => record.status === 'pending'), running: records.some(record => record.status === 'running') };
+    return { ...model, records, accepted, passCount: accepted.length, mean: geoMean(accepted.map(record => record.speedup)), pending: records.every(record => record.status === 'pending'), running: records.some(record => record.status === 'running') };
   }).sort((a, b) => {
-    if (a.excluded !== b.excluded) return a.excluded ? 1 : -1;
     if (a.pending !== b.pending) return a.pending ? 1 : -1;
     return (b.score ?? -1) - (a.score ?? -1) || b.passCount - a.passCount || b.mean - a.mean;
   });
@@ -93,9 +92,9 @@ function renderSummary(data) {
 function renderBars(models) {
   const target = document.getElementById('bars');
   target.replaceChildren(...models.map(model => {
-    const row = el('div', `bar-row${model.excluded ? ' invalid' : ''}${model.pending ? ' pending' : ''}`);
+    const row = el('div', `bar-row${model.pending ? ' pending' : ''}`);
     const label = el('div', 'bar-label', model.name);
-    label.append(el('small', '', model.excluded ? 'Excluded · provider failure' : model.pending ? 'Not started' : model.running ? `${model.harness} · in progress` : `${model.harness} · ${model.passCount}/10 PASS`));
+    label.append(el('small', '', model.pending ? 'Not started' : model.running ? `${model.harness} · in progress` : `${model.harness} · ${model.passCount}/10 PASS`));
     const track = el('div', 'bar-track');
     const fill = el('div', 'bar-fill');
     fill.style.width = `${numeric(model.score) ? model.score * 2 : 0}%`;
@@ -118,10 +117,9 @@ function renderBoard(data, models) {
     const modelCell = el('th');
     modelCell.scope = 'row';
     modelCell.append(el('div', 'model-name', model.name), el('div', 'model-harness', model.harness));
-    if (model.excluded) modelCell.append(el('div', 'row-note', 'INVALID · PROVIDER COOLDOWN'));
     if (model.pending) modelCell.append(el('div', 'row-note', 'NOT STARTED'));
     if (model.running) modelCell.append(el('div', 'row-note', 'FORMAL RUN IN PROGRESS'));
-    row.append(modelCell, el('td', 'count-cell', score(model.score)), el('td', 'count-cell', model.excluded || model.pending || model.running ? '—' : `${model.passCount}/10`));
+    row.append(modelCell, el('td', 'count-cell', score(model.score)), el('td', 'count-cell', model.pending || model.running ? '—' : `${model.passCount}/10`));
     data.tasks.forEach(task => {
       const td = el('td');
       td.append(cell(model.records.find(record => record.task === task.id)));
