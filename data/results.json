@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-11-24T15:17:58Z",
-  "repeat_audited_at": "2026-11-24T15:18:09Z",
+  "audited_at": "2026-11-25T10:12:16Z",
+  "repeat_audited_at": "2026-11-25T10:12:27Z",
   "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
   "score_provisional": false,
@@ -791,8 +791,8 @@
     {
       "model": "claude-opus-5-5",
       "task": "chemberta",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 1.9880927154768104,
       "trace_captured": true,
       "provider_error": null,
       "failed_gates": [
@@ -825,12 +825,14 @@
     {
       "model": "minimax-m3.1-flash",
       "task": "protenix",
-      "status": "running",
-      "speedup": null,
+      "status": "not_exact",
+      "speedup": 1.0060898518622812,
       "trace_captured": true,
       "provider_error": null,
       "failed_gates": [
-
+        "status_pass",
+        "accepted",
+        "exact"
       ]
     },
     {
