@@ -94,7 +94,7 @@ function renderBars(models) {
   target.replaceChildren(...models.map(model => {
     const row = el('div', `bar-row${model.pending ? ' pending' : ''}`);
     const label = el('div', 'bar-label', model.name);
-    label.append(el('small', '', model.pending ? 'Not started' : model.running ? `${model.harness} · in progress` : `${model.harness} · ${model.passCount}/10 PASS`));
+    label.append(el('small', '', model.pending ? 'Not started' : `${model.harness} · ${model.passCount}/10 PASS${model.running ? ' · in progress' : ''}`));
     const track = el('div', 'bar-track');
     const fill = el('div', 'bar-fill');
     fill.style.width = `${numeric(model.score) ? model.score * 2 : 0}%`;
@@ -119,7 +119,7 @@ function renderBoard(data, models) {
     modelCell.append(el('div', 'model-name', model.name), el('div', 'model-harness', model.harness));
     if (model.pending) modelCell.append(el('div', 'row-note', 'NOT STARTED'));
     if (model.running) modelCell.append(el('div', 'row-note', 'FORMAL RUN IN PROGRESS'));
-    row.append(modelCell, el('td', 'count-cell', score(model.score)), el('td', 'count-cell', model.pending || model.running ? '—' : `${model.passCount}/10`));
+    row.append(modelCell, el('td', 'count-cell', score(model.score)), el('td', 'count-cell', `${model.passCount}/10`));
     data.tasks.forEach(task => {
       const td = el('td');
       const selected = model.records.find(record => record.task === task.id);
