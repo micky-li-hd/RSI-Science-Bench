@@ -1,7 +1,9 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-11-25T10:32:32Z",
-  "repeat_audited_at": "2026-11-25T10:32:42Z",
+  "audited_at": "2026-11-25T12:19:39Z",
+  "repeat_audited_at": "2026-11-25T12:19:28Z",
+  "gemini_budget_retry_audited_at": "2026-11-25T12:19:39Z",
+  "gemini_budget_retry_note": "The initial Gemini run encountered AIHub personal-budget exhaustion (401/code 2005). Its original traces and completed verifier results are preserved; the displayed Gemini row is a clean rerun on the same frozen tasks, H20 GPUs, Antigravity CLI, 36,000-second agent ceiling and independent verifier.",
   "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
   "score_provisional": true,
@@ -734,9 +736,9 @@
     {
       "model": "gemini-4-hydrogen",
       "task": "protenix",
-      "status": "running",
+      "status": "pending",
       "speedup": null,
-      "trace_captured": true,
+      "trace_captured": false,
       "provider_error": null,
       "failed_gates": [
 
