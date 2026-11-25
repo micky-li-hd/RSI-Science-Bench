@@ -170,7 +170,7 @@ async function main() {
   if (data.schema_version !== 2 || data.records.length !== data.models.length * data.tasks.length || data.repeat_records.length !== 15) throw new Error('Incomplete leaderboard data');
   document.getElementById('updated').textContent = `Primary audited ${dateLabel(data.audited_at)} · second attempts ${dateLabel(data.repeat_audited_at)}`;
   document.getElementById('footer-date').textContent = `Second-attempt snapshot: ${dateLabel(data.repeat_audited_at)}`;
-  document.getElementById('score-status').textContent = 'Primary scores only; second attempts are separately labeled and do not change these totals. ChemBERTa primary trials may have inherited earlier template notes.';
+  document.getElementById('score-status').textContent = 'Primary scores only; second attempts are separately labeled and do not change these totals. ChemBERTa primary trials may have inherited earlier template notes.' + (data.gemini_budget_retry_note ? ` ${data.gemini_budget_retry_note}` : '');
   const retryDone = data.repeat_records.filter(validRetry).length;
   const retryErrors = data.repeat_records.filter(item => ['agent_error', 'infrastructure', 'cancelled'].includes(item.status)).length;
   document.getElementById('repeat-status').textContent = `Second attempts: ${retryDone}/15 valid results, ${data.repeat_records.filter(item => item.status === 'running').length} running, ${data.repeat_records.filter(item => item.status === 'pending').length} queued${retryErrors ? `, ${retryErrors} run error${retryErrors === 1 ? '' : 's'} excluded from valid results` : ''}. All five ChemBERTa retries use blank report and work-log templates. Primary scores remain unchanged.`;
