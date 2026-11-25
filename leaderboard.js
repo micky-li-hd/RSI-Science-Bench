@@ -54,7 +54,7 @@ function retryCell(record) {
     : record.status === 'infrastructure' ? 'Retry provider error'
     : 'Retry run error';
   const note = el('span', `retry-note ${record.status}`, label);
-  note.title = `Second attempt only · ${verification(record)} · primary score unchanged`;
+  note.title = `Sensitivity check only · ${verification(record)} · scored result unchanged`;
   return note;
 }
 
@@ -122,9 +122,19 @@ function renderBoard(data, models) {
     row.append(modelCell, el('td', 'count-cell', score(model.score)), el('td', 'count-cell', model.pending || model.running ? '—' : `${model.passCount}/10`));
     data.tasks.forEach(task => {
       const td = el('td');
-      td.append(cell(model.records.find(record => record.task === task.id)));
+      const selected = model.records.find(record => record.task === task.id);
+      td.append(cell(selected));
       const retry = data.repeat_records.find(record => record.model === model.id && record.task === task.id);
-      if (retry) td.append(retryCell(retry));
+      if (selected.attempt === 'clean_chemberta') {
+        const old = data.superseded_records.find(record => record.model === model.id && record.task === task.id);
+        const note = el('span', 'retry-note pass', 'Clean rerun · scored');
+        note.title = `Earlier template-contaminated trial excluded${numeric(old?.speedup) ? ` · old measured ${speed(old.speedup)}` : ''}`;
+        td.append(note);
+      } else if (selected.attempt === 'gemini_provider_retry') {
+        const note = el('span', `retry-note ${selected.status}`, 'Provider retry');
+        note.title = 'Earlier Vertex 429 trial excluded; fresh same-setting run selected';
+        td.append(note);
+      } else if (retry) td.append(retryCell(retry));
       row.append(td);
     });
     body.append(row);
@@ -148,7 +158,11 @@ function renderTask(data, models, taskId) {
     name.append(el('div', 'task-item-harness', model.harness));
     name.append(el('div', 'task-item-verification', verification(record)));
     const retry = data.repeat_records.find(item => item.model === model.id && item.task === taskId);
-    if (retry) name.append(el('div', 'task-item-retry', `Second attempt: ${verification(retry)}${numeric(retry.speedup) ? ` · ${speed(retry.speedup)}` : ''}`));
+    if (record.attempt === 'clean_chemberta') {
+      name.append(el('div', 'task-item-retry', 'Scored clean rerun; earlier template-contaminated attempt excluded'));
+    } else if (record.attempt === 'gemini_provider_retry') {
+      name.append(el('div', 'task-item-retry', 'Same-setting clean retry after Vertex 429; failed attempt retained'));
+    } else if (retry) name.append(el('div', 'task-item-retry', `Sensitivity attempt: ${verification(retry)}${numeric(retry.speedup) ? ` · ${speed(retry.speedup)}` : ''}`));
     const meter = el('div', 'task-item-meter');
     const fill = el('span');
     fill.style.width = record.status === 'pass' ? `${Math.min(100, record.speedup / max * 100)}%` : '0%';
@@ -167,13 +181,13 @@ async function main() {
   const response = await fetch(dataUrl, { cache: 'no-store' });
   if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
   const data = await response.json();
-  if (data.schema_version !== 2 || data.records.length !== data.models.length * data.tasks.length || data.repeat_records.length !== 15) throw new Error('Incomplete leaderboard data');
-  document.getElementById('updated').textContent = `Primary audited ${dateLabel(data.audited_at)} · second attempts ${dateLabel(data.repeat_audited_at)}`;
-  document.getElementById('footer-date').textContent = `Second-attempt snapshot: ${dateLabel(data.repeat_audited_at)}`;
-  document.getElementById('score-status').textContent = 'Primary scores only; second attempts are separately labeled and do not change these totals. ChemBERTa primary trials may have inherited earlier template notes.' + (data.gemini_budget_retry_note ? ` ${data.gemini_budget_retry_note}` : '');
+  if (data.schema_version !== 2 || data.records.length !== data.models.length * data.tasks.length || data.repeat_records.length !== 15 || data.superseded_records.length < 5) throw new Error('Incomplete leaderboard data');
+  document.getElementById('updated').textContent = `Formal audit ${dateLabel(data.audited_at)} · clean/repeat audit ${dateLabel(data.repeat_audited_at)}`;
+  document.getElementById('footer-date').textContent = `Latest formal snapshot: ${dateLabel(data.audited_at)}`;
+  document.getElementById('score-status').textContent = 'Scores use the five clean ChemBERTa reruns; their template-contaminated predecessors are excluded and retained. Other second attempts are sensitivity checks, not best-of-two replacements.' + (data.gemini_budget_retry_note ? ` ${data.gemini_budget_retry_note}` : '');
   const retryDone = data.repeat_records.filter(validRetry).length;
   const retryErrors = data.repeat_records.filter(item => ['agent_error', 'infrastructure', 'cancelled'].includes(item.status)).length;
-  document.getElementById('repeat-status').textContent = `Second attempts: ${retryDone}/15 valid results, ${data.repeat_records.filter(item => item.status === 'running').length} running, ${data.repeat_records.filter(item => item.status === 'pending').length} queued${retryErrors ? `, ${retryErrors} run error${retryErrors === 1 ? '' : 's'} excluded from valid results` : ''}. All five ChemBERTa retries use blank report and work-log templates. Primary scores remain unchanged.`;
+  document.getElementById('repeat-status').textContent = `Repeat attempts: ${retryDone}/15 valid results, ${data.repeat_records.filter(item => item.status === 'running').length} running, ${data.repeat_records.filter(item => item.status === 'pending').length} queued${retryErrors ? `, ${retryErrors} run error${retryErrors === 1 ? '' : 's'}` : ''}. Five clean ChemBERTa attempts are scored; ten other repeats remain sensitivity checks.`;
   const models = rankModels(data);
   renderSummary(data);
   renderBars(models);
