@@ -59,6 +59,21 @@ function retryCell(record) {
   return note;
 }
 
+function redoFor(data, modelId, taskId) {
+  return [...(data.redo_records || [])].reverse().find(item => item.model === modelId && item.task === taskId);
+}
+
+function redoCell(record) {
+  if (!record) return null;
+  const label = record.status === 'running' ? 'Redo running'
+    : record.status === 'pending' ? 'Redo queued' : 'Invalid redo · retained';
+  const display = ['pass', 'not_accepted', 'not_exact'].includes(record.status)
+    ? `Sensitivity ${record.status === 'pass' ? 'PASS' : 'not PASS'} · ${speed(record.speedup)}` : label;
+  const note = el('span', `retry-note ${record.status}`, display);
+  note.title = `Single-attempt scored result unchanged · ${verification(record)}`;
+  return note;
+}
+
 function rankModels(data) {
   return data.models.map(model => {
     const records = data.records.filter(record => record.model === model.id);
@@ -126,7 +141,9 @@ function renderBoard(data, models) {
       const selected = model.records.find(record => record.task === task.id);
       td.append(cell(selected));
       const retry = data.repeat_records.find(record => record.model === model.id && record.task === task.id);
-      if (selected.attempt === 'clean_chemberta') {
+      const redo = redoFor(data, model.id, task.id);
+      if (redo) td.append(redoCell(redo));
+      else if (selected.attempt === 'clean_chemberta') {
         const old = data.superseded_records.find(record => record.model === model.id && record.task === task.id);
         const note = el('span', 'retry-note pass', 'Clean rerun · scored');
         note.title = `Earlier template-contaminated trial excluded${numeric(old?.speedup) ? ` · old measured ${speed(old.speedup)}` : ''}`;
@@ -159,7 +176,10 @@ function renderTask(data, models, taskId) {
     name.append(el('div', 'task-item-harness', model.harness));
     name.append(el('div', 'task-item-verification', verification(record)));
     const retry = data.repeat_records.find(item => item.model === model.id && item.task === taskId);
-    if (record.attempt === 'clean_chemberta') {
+    const redo = redoFor(data, model.id, taskId);
+    if (redo) {
+      name.append(el('div', 'task-item-retry', `Sensitivity redo only; scored result unchanged · ${verification(redo)}`));
+    } else if (record.attempt === 'clean_chemberta') {
       name.append(el('div', 'task-item-retry', 'Scored clean rerun; earlier template-contaminated attempt excluded'));
     } else if (record.attempt === 'gemini_provider_retry') {
       name.append(el('div', 'task-item-retry', 'Same-setting clean retry after Vertex 429; failed attempt retained'));
@@ -183,12 +203,14 @@ async function main() {
   if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
   const data = await response.json();
   if (data.schema_version !== 2 || data.records.length !== data.models.length * data.tasks.length || data.repeat_records.length !== 15 || data.superseded_records.length < 5) throw new Error('Incomplete leaderboard data');
-  document.getElementById('updated').textContent = `Formal audit ${dateLabel(data.audited_at)} · clean/repeat audit ${dateLabel(data.repeat_audited_at)}`;
+  document.getElementById('updated').textContent = `Formal audit ${dateLabel(data.audited_at)} · redo audit ${dateLabel(data.redo3_audited_at)}`;
   document.getElementById('footer-date').textContent = `Latest formal snapshot: ${dateLabel(data.audited_at)}`;
-  document.getElementById('score-status').textContent = 'Scores use the five clean ChemBERTa reruns; their template-contaminated predecessors are excluded and retained. Other second attempts are sensitivity checks, not best-of-two replacements.' + (data.gemini_budget_retry_note ? ` ${data.gemini_budget_retry_note}` : '');
+  document.getElementById('score-status').textContent = 'Scores retain the single-attempt model–harness setting. The 2026-11-26 targeted performance redos are sensitivity checks, not best-of-N score replacements. The five clean ChemBERTa reruns replaced template-contaminated originals.' + (data.gemini_budget_retry_note ? ` ${data.gemini_budget_retry_note}` : '');
   const retryDone = data.repeat_records.filter(validRetry).length;
   const retryErrors = data.repeat_records.filter(item => ['agent_error', 'infrastructure', 'cancelled'].includes(item.status)).length;
-  document.getElementById('repeat-status').textContent = `Repeat attempts: ${retryDone}/15 valid results, ${data.repeat_records.filter(item => item.status === 'running').length} running, ${data.repeat_records.filter(item => item.status === 'pending').length} queued${retryErrors ? `, ${retryErrors} run error${retryErrors === 1 ? '' : 's'}` : ''}. Five clean ChemBERTa attempts are scored; ten other repeats remain sensitivity checks.`;
+  const latestRedos = [...new Map((data.redo_records || []).map(item => [`${item.model}/${item.task}`, item])).values()];
+  const redoValid = latestRedos.filter(validRetry).length;
+  document.getElementById('repeat-status').textContent = `2026-11-26 targeted sensitivity redos: ${redoValid}/${latestRedos.length} independently checked, ${latestRedos.filter(item => item.status === 'running').length} running, ${latestRedos.filter(item => item.status === 'pending').length} queued. Earlier sensitivity attempts: ${retryDone}/15 valid results${retryErrors ? `, ${retryErrors} run errors` : ''}. Neither set replaces single-attempt scores.`;
   const models = rankModels(data);
   renderSummary(data);
   renderBars(models);
