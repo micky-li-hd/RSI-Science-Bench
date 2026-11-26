@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-11-25T15:39:10Z",
-  "repeat_audited_at": "2026-11-25T15:38:59Z",
-  "gemini_budget_retry_audited_at": "2026-11-25T15:39:10Z",
-  "gemini_provider_retry_audited_at": "2026-11-25T15:39:20Z",
-  "gemini_budget_retry_note": "The initial Gemini run encountered AIHub personal-budget exhaustion (401/code 2005). Its original traces and completed verifier results are preserved. The displayed Gemini results are clean same-setting reruns on the frozen tasks, H20 GPUs, Antigravity CLI, 36,000-second agent ceiling and independent verifier; TorchMD-QM9 needed a further clean retry after a Vertex 429 context-summarization failure.",
+  "audited_at": "2026-11-26T00:26:59Z",
+  "repeat_audited_at": "2026-11-26T00:26:48Z",
+  "gemini_budget_retry_audited_at": "2026-11-26T00:26:59Z",
+  "gemini_provider_retry_audited_at": "2026-11-26T00:27:09Z",
+  "gemini_budget_retry_note": "The initial Gemini run encountered AIHub personal-budget exhaustion (401/code 2005). Its original traces and completed verifier results are preserved. The displayed Gemini results are clean same-setting reruns on the frozen tasks, H20 GPUs, Antigravity CLI, 36,000-second agent ceiling and independent verifier; TorchMD-QM9 needed a further clean retry after a Vertex 429 context-summarization failure. In the Protenix retry, an orphan test process waiting on a stale JIT lock was terminated only after the 36,000-second agent deadline; the independent verifier ran on the unchanged candidate and frozen artifacts.",
   "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. Clean ChemBERTa retries replace contaminated-template first attempts; infrastructure-invalid Gemini attempts are preserved but excluded. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
-  "score_provisional": true,
+  "score_provisional": false,
   "hardware": "NVIDIA H20; not directly comparable with the RSI-Infra Preview H200 leaderboard.",
   "models": [
     {
@@ -15,42 +15,42 @@
       "name": "GPT-6.2 Astra",
       "harness": "Codex 0.171.0",
       "family": "GPT",
-      "score": 26.41
+      "score": 22.62
     },
     {
       "id": "claude-opus-5-5",
       "name": "Claude Opus 5.5",
       "harness": "Claude Code 2.1.330",
       "family": "Claude",
-      "score": 47.71
+      "score": 41.44
     },
     {
       "id": "minimax-m3.1-flash",
       "name": "MiniMax M3.1 Flash",
       "harness": "Codex 0.171.0",
       "family": "MiniMax",
-      "score": 13.01
+      "score": 10.41
     },
     {
       "id": "deepseek-flash",
       "name": "DeepSeek V4.1 Flash-1017",
       "harness": "DSH 0.2.2-rc.5",
       "family": "DeepSeek",
-      "score": 8.37
+      "score": 8.0
     },
     {
       "id": "gemini-4-hydrogen",
       "name": "Gemini 4 Hydrogen",
       "harness": "Antigravity CLI 1.5.17",
       "family": "Gemini",
-      "score": null
+      "score": 40.35
     },
     {
       "id": "kimi-k3.1-pro",
       "name": "Kimi k3.1-pro",
       "harness": "Claude Code 2.1.330",
       "family": "Kimi",
-      "score": 14.39
+      "score": 11.59
     }
   ],
   "tasks": [
@@ -783,8 +783,8 @@
       "model": "gemini-4-hydrogen",
       "task": "proteinmpnn",
       "attempt": "gemini_budget_retry",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 7.124960797923428,
       "trace_captured": true,
       "provider_error": null,
       "failed_gates": [
@@ -795,12 +795,16 @@
       "model": "gemini-4-hydrogen",
       "task": "protenix",
       "attempt": "gemini_budget_retry",
-      "status": "running",
-      "speedup": null,
+      "status": "agent_error",
+      "speedup": 1.3195954285033626,
       "trace_captured": true,
       "provider_error": null,
       "failed_gates": [
-
+        "deadline_not_reached",
+        "agent_returncode",
+        "status_pass",
+        "accepted",
+        "exact"
       ]
     },
     {
@@ -831,8 +835,8 @@
       "model": "gemini-4-hydrogen",
       "task": "torchmd_qm9",
       "attempt": "gemini_provider_retry",
-      "status": "running",
-      "speedup": null,
+      "status": "pass",
+      "speedup": 3.937172084031915,
       "trace_captured": true,
       "provider_error": null,
       "failed_gates": [
