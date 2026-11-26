@@ -23,7 +23,7 @@ const geoMean = values => values.length ? Math.exp(values.reduce((sum, value) =>
 const dateLabel = value => new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Shanghai' }).format(new Date(value)) + ' CST';
 const complete = record => !['pending', 'running', 'infrastructure', 'cancelled'].includes(record.status);
 const validRetry = record => ['pass', 'not_accepted', 'not_exact'].includes(record.status);
-const gateLabel = gate => ({ exact: 'exactness', accepted: 'benefit bar', agent_returncode: 'agent exit', verifier_returncode: 'verifier exit', judge_intact_after_agent: 'frozen artifacts', judge_intact_after_verifier: 'frozen artifacts' })[gate] || gate.replaceAll('_', ' ');
+const gateLabel = gate => ({ exact: 'exactness', accepted: 'acceptance', deadline_not_reached: 'agent deadline', agent_returncode: 'agent exit', verifier_returncode: 'verifier exit', judge_intact_after_agent: 'frozen artifacts', judge_intact_after_verifier: 'frozen artifacts' })[gate] || gate.replaceAll('_', ' ');
 function verification(record) {
   if (record.status === 'pass') return 'Independent verifier PASS · exact N0 · benefit bar · frozen artifacts' + (record.trace_captured ? ' · Trace captured' : '');
   if (record.status === 'running') return 'Formal run active · verification pending' + (record.trace_captured ? ' · Trace captured' : '');
@@ -37,7 +37,8 @@ function verification(record) {
 function cell(record) {
   const config = STATUS[record.status] || STATUS.pending;
   const label = record.status === 'pass' || record.status === 'not_accepted' || record.status === 'not_exact'
-    ? speed(record.speedup) : config.short;
+    ? speed(record.speedup) : record.status === 'agent_error' && numeric(record.speedup)
+      ? `${speed(record.speedup)} · run error` : config.short;
   const badge = el('span', `cell ${record.status}`, label);
   badge.title = config.long + (numeric(record.speedup) ? ` · measured ${speed(record.speedup)}` : '') + (record.trace_captured ? ' · trace captured' : '');
   badge.setAttribute('aria-label', badge.title);
