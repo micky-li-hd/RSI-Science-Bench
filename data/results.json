@@ -1,11 +1,13 @@
 {
   "schema_version": 2,
-  "audited_at": "2026-11-26T00:26:59Z",
-  "repeat_audited_at": "2026-11-26T00:26:48Z",
-  "gemini_budget_retry_audited_at": "2026-11-26T00:26:59Z",
-  "gemini_provider_retry_audited_at": "2026-11-26T00:27:09Z",
+  "audited_at": "2026-11-26T11:19:50Z",
+  "repeat_audited_at": "2026-11-26T11:19:39Z",
+  "gemini_budget_retry_audited_at": "2026-11-26T11:19:50Z",
+  "gemini_provider_retry_audited_at": "2026-11-26T11:20:02Z",
+  "redo2_audited_at": "2026-11-26T11:20:13Z",
+  "redo3_audited_at": "2026-11-26T11:20:24Z",
   "gemini_budget_retry_note": "The initial Gemini run encountered AIHub personal-budget exhaustion (401/code 2005). Its original traces and completed verifier results are preserved. The displayed Gemini results are clean same-setting reruns on the frozen tasks, H20 GPUs, Antigravity CLI, 36,000-second agent ceiling and independent verifier; TorchMD-QM9 needed a further clean retry after a Vertex 429 context-summarization failure. In the Protenix retry, an orphan test process waiting on a stale JIT lock was terminated only after the 36,000-second agent deadline; the independent verifier ran on the unchanged candidate and frozen artifacts.",
-  "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. Clean ChemBERTa retries replace contaminated-template first attempts; infrastructure-invalid Gemini attempts are preserved but excluded. This is not the original RSI-Infra ECI fit.",
+  "method": "Science Score = 50/10 × sum over tasks of ln(accepted speedup)/ln(best accepted speedup on that task); rejected trials contribute 0. Only complete rows are scored. Clean ChemBERTa and infrastructure-invalid Gemini attempts were replaced under the original repair policy. Targeted 2026-11-26 performance redos are sensitivity analyses and never replace single-attempt scores. This is not the original RSI-Infra ECI fit.",
   "score_scale": 50,
   "score_provisional": false,
   "hardware": "NVIDIA H20; not directly comparable with the RSI-Infra Preview H200 leaderboard.",
@@ -1090,5 +1092,247 @@
       ]
     }
   ],
-  "repeat_note": "All five ChemBERTa second attempts use a fresh workspace with blank REPORT.md and WORK_LOG.md. These clean attempts are the authoritative scored ChemBERTa results; their contaminated-template predecessors remain in superseded_records. Other repeat attempts remain sensitivity checks and never replace scores."
+  "repeat_note": "All five ChemBERTa second attempts use a fresh workspace with blank REPORT.md and WORK_LOG.md. Their contaminated-template predecessors remain in superseded_records. The 2026-11-26 targeted redos are sensitivity checks and never replace the single-attempt leaderboard, even when they pass.",
+  "redo_records": [
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "chemberta",
+      "attempt": "redo2",
+      "status": "agent_error",
+      "speedup": 0.9814696746595409,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "endpoint_protocol",
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "esm2",
+      "attempt": "redo2",
+      "status": "agent_error",
+      "speedup": 0.9997961063597022,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "endpoint_protocol",
+        "agent_returncode",
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "protenix",
+      "attempt": "redo2",
+      "status": "running",
+      "speedup": null,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "chemberta",
+      "attempt": "redo2",
+      "status": "not_accepted",
+      "speedup": 1.0076763083087923,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "esm2",
+      "attempt": "redo2",
+      "status": "not_accepted",
+      "speedup": 0.9945149026940568,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "fno",
+      "attempt": "redo2",
+      "status": "pass",
+      "speedup": 2.9075925161678393,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "nucleotide_transformer",
+      "attempt": "redo2",
+      "status": "not_accepted",
+      "speedup": 1.0399778698514905,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "pyg_qm9",
+      "attempt": "redo2",
+      "status": "not_accepted",
+      "speedup": 1.0244987890939397,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "deepseek-flash",
+      "task": "schnetpack_qm9",
+      "attempt": "redo2",
+      "status": "not_accepted",
+      "speedup": 1.033182340429408,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "nucleotide_transformer",
+      "attempt": "redo2",
+      "status": "pass",
+      "speedup": 1.054707429572916,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "proteinmpnn",
+      "attempt": "redo2",
+      "status": "not_accepted",
+      "speedup": 1.0040984860577753,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "kimi-k3.1-pro",
+      "task": "pyg_qm9",
+      "attempt": "redo2",
+      "status": "not_accepted",
+      "speedup": 0.11682698222566067,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "gemini-4-hydrogen",
+      "task": "protenix",
+      "attempt": "redo2",
+      "status": "pending",
+      "speedup": null,
+      "trace_captured": false,
+      "provider_error": null,
+      "failed_gates": [
+        "trial_exists",
+        "rsi_protocol",
+        "model",
+        "agent",
+        "harness_version",
+        "reasoning_effort",
+        "endpoint_protocol",
+        "agent_timeout_36000",
+        "gpu_visible",
+        "gpu_h20",
+        "frozen_before",
+        "one_trace_file",
+        "trace_nonempty",
+        "final_exists",
+        "deadline_not_reached",
+        "agent_returncode",
+        "verifier_returncode",
+        "judge_intact_after_agent",
+        "judge_intact_after_verifier",
+        "final_result_exists",
+        "status_pass",
+        "accepted",
+        "exact"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "chemberta",
+      "attempt": "redo3",
+      "status": "not_accepted",
+      "speedup": 0.981345620120162,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+        "status_pass",
+        "accepted"
+      ],
+      "authoritative": false
+    },
+    {
+      "model": "minimax-m3.1-flash",
+      "task": "esm2",
+      "attempt": "redo3",
+      "status": "pass",
+      "speedup": 1.1971151538819749,
+      "trace_captured": true,
+      "provider_error": null,
+      "failed_gates": [
+
+      ],
+      "authoritative": false
+    }
+  ]
 }
