@@ -203,14 +203,14 @@ async function main() {
   if (!response.ok) throw new Error(`Data request failed: ${response.status}`);
   const data = await response.json();
   if (data.schema_version !== 2 || data.records.length !== data.models.length * data.tasks.length || data.repeat_records.length !== 15 || data.superseded_records.length < 5) throw new Error('Incomplete leaderboard data');
-  document.getElementById('updated').textContent = `Formal audit ${dateLabel(data.audited_at)} · redo audit ${dateLabel(data.redo3_audited_at)}`;
+  document.getElementById('updated').textContent = `Formal audit ${dateLabel(data.audited_at)} · redo audit ${dateLabel(data.late_redo_audited_at || data.redo3_audited_at)}`;
   document.getElementById('footer-date').textContent = `Latest formal snapshot: ${dateLabel(data.audited_at)}`;
-  document.getElementById('score-status').textContent = 'Scores retain the single-attempt model–harness setting. The 2026-11-26 targeted performance redos are sensitivity checks, not best-of-N score replacements. The five clean ChemBERTa reruns replaced template-contaminated originals.' + (data.gemini_budget_retry_note ? ` ${data.gemini_budget_retry_note}` : '');
+  document.getElementById('score-status').textContent = 'Scores retain the single-attempt model–harness setting. The 2026-11-26/27 targeted performance redos are sensitivity checks, not best-of-N score replacements. The five clean ChemBERTa reruns replaced template-contaminated originals.' + (data.gemini_budget_retry_note ? ` ${data.gemini_budget_retry_note}` : '');
   const retryDone = data.repeat_records.filter(validRetry).length;
   const retryErrors = data.repeat_records.filter(item => ['agent_error', 'infrastructure', 'cancelled'].includes(item.status)).length;
   const latestRedos = [...new Map((data.redo_records || []).map(item => [`${item.model}/${item.task}`, item])).values()];
   const redoValid = latestRedos.filter(validRetry).length;
-  document.getElementById('repeat-status').textContent = `2026-11-26 targeted sensitivity redos: ${redoValid}/${latestRedos.length} independently checked, ${latestRedos.filter(item => item.status === 'running').length} running, ${latestRedos.filter(item => item.status === 'pending').length} queued. Earlier sensitivity attempts: ${retryDone}/15 valid results${retryErrors ? `, ${retryErrors} run errors` : ''}. Neither set replaces single-attempt scores.`;
+  document.getElementById('repeat-status').textContent = `2026-11-26/27 targeted sensitivity redos: ${redoValid}/${latestRedos.length} independently checked, ${latestRedos.filter(item => item.status === 'running').length} running, ${latestRedos.filter(item => item.status === 'pending').length} pending. Earlier sensitivity attempts: ${retryDone}/15 valid results${retryErrors ? `, ${retryErrors} run errors` : ''}. Neither set replaces single-attempt scores.`;
   const models = rankModels(data);
   renderSummary(data);
   renderBars(models);
